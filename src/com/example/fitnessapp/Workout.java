@@ -8,7 +8,7 @@ public class Workout implements Serializable {
     private String name;
     private ArrayList<Exercise> exerciseList;
 
-    public Workout(String name, int image) {
+    public Workout(String name) {
         this.name = name;
         this.exerciseList = new ArrayList<>();
     }
@@ -23,5 +23,14 @@ public class Workout implements Serializable {
 
     public void addExercise(Exercise exercise){
         exerciseList.add(exercise);
+    }
+
+    public void printWorkout(){
+        System.out.println("Workout: " + name);
+        System.out.println("\tExercises:");
+        for(Exercise e : exerciseList){
+            System.out.print("\t\t");
+            e.printExercise();
+        }
     }
 }
