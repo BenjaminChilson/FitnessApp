@@ -15,20 +15,6 @@ public class Set {
         System.out.println(repetitions + " Repetitions at " + weight + " " + weightUnit.getStringRepresentation());
     }
 
-    public enum WeightUnit{
-        POUNDS, KILOGRAMS;
-
-        public String getStringRepresentation(){
-            switch(this){
-                case POUNDS:
-                    return "pounds";
-                case KILOGRAMS:
-                    return "kilograms";
-                default:
-                    return "weight measurement could not be found";
-            }
-        }
-    }
 }
 
 

@@ -1,37 +1,16 @@
 package com.example.fitnessapp;
 
-public class ExerciseLog {
-    private int sets;
-    private int reps;
-    private double weight;
+import java.util.ArrayList;
 
-    public ExerciseLog(int sets, int reps, double weight) {
-        this.sets = sets;
-        this.reps = reps;
-        this.weight = weight;
-    }
+public class ExerciseLog extends SetSeries{
 
-    public int getSets() {
-        return sets;
-    }
-
-    public void setSets(int sets) {
+    public ExerciseLog(ArrayList<Set> sets) {
+        super();
         this.sets = sets;
     }
 
-    public int getReps() {
-        return reps;
+    public void addSet(Set set){
+        sets.add(set);
     }
 
-    public void setReps(int reps) {
-        this.reps = reps;
-    }
-
-    public double getWeight() {
-        return weight;
-    }
-
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
 }

@@ -31,6 +31,7 @@ public class Workout implements Serializable {
         for(Exercise e : exerciseList){
             System.out.print("\t\t");
             e.printExercise();
+
         }
     }
 }

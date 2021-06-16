@@ -6,13 +6,13 @@ import java.util.List;
 
 public class Exercise implements Serializable {
     String name;
-    ArrayList<Integer> regimentSet;
-    ArrayList<Set> sets;
+    ArrayList<Integer> setRepetitions;
     ArrayList<ExerciseLog> exerciseLogs;
+    ExerciseGoal exerciseGoal;
 
     public Exercise(String name) {
         this.name = name;
-        sets = new ArrayList<>();
+        setRepetitions = new ArrayList<>();
         exerciseLogs = new ArrayList<>();
     }
 
@@ -20,12 +20,12 @@ public class Exercise implements Serializable {
         return name;
     }
 
-    public void addExerciseLog(int sets, int reps, double weight){
-        exerciseLogs.add(new ExerciseLog(sets, reps, weight));
+    public void addSetRepetition(Integer setRepetition){
+        setRepetitions.add(setRepetition);
     }
 
-    public void addSet(Set set){
-        sets.add(set);
+    public void addExerciseLog(ArrayList<Set> sets){
+        exerciseLogs.add(new ExerciseLog(sets));
     }
 
     public ArrayList<ExerciseLog> getExerciseLogs() {
@@ -34,9 +34,36 @@ public class Exercise implements Serializable {
 
     public void printExercise() {
         System.out.println(name);
-        for(Set s : sets){
-            System.out.print("\t\t\t");
-            s.printSet();
+        System.out.print("\t\t\t");
+        for(int i = 0; i < setRepetitions.size(); i++){
+            System.out.print(setRepetitions.get(i) + " Reps");
+            if(i < setRepetitions.size() - 1){
+                System.out.print(", ");
+            }
         }
+        System.out.print("\n");
+        System.out.println("\t\tLast Recorded Exercise:");
+        printLastExerciseLog();
+        System.out.println("\t\tGoal for next time:");
+        exerciseGoal.print();
+    }
+
+    public void printLastExerciseLog(){
+        getLastExerciseLog().print();
+    }
+
+    public ExerciseLog getLastExerciseLog(){
+        if(exerciseLogs.size() > 0){
+            return exerciseLogs.get(exerciseLogs.size() - 1);
+        }
+        return new ExerciseLog(new ArrayList<Set>());
+    }
+
+    public void addExerciseGoal(ExerciseGoal exerciseGoal){
+        this.exerciseGoal = exerciseGoal;
+    }
+
+    public void addExerciseGoal(ArrayList<Set> sets){
+        this.exerciseGoal = new ExerciseGoal(sets);
     }
 }
