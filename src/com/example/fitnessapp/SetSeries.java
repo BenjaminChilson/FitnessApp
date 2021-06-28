@@ -27,12 +27,24 @@ public class SetSeries {
 
     public void print(){
         if(sets.isEmpty()){
-            System.out.println("No Sets Recorded for this Exercise");
+            System.out.println("\t\t\t\tNo Sets Recorded for this Exercise");
             return;
         }
         for(Set s : sets){
             System.out.print("\t\t\t\t");
             s.printSet();
         }
+    }
+
+    public void addSet(int reps, double weight, WeightUnit weightUnit){
+        sets.add(new Set(reps, weight, weightUnit));
+    }
+
+    public void addSet(Set set){
+        sets.add(set);
+    }
+
+    public Set getSetAtIndex(int i){
+        return sets.get(i);
     }
 }

@@ -8,7 +8,6 @@ public class Exercise implements Serializable {
     String name;
     ArrayList<Integer> setRepetitions;
     ArrayList<ExerciseLog> exerciseLogs;
-    ExerciseGoal exerciseGoal;
 
     public Exercise(String name) {
         this.name = name;
@@ -24,8 +23,8 @@ public class Exercise implements Serializable {
         setRepetitions.add(setRepetition);
     }
 
-    public void addExerciseLog(ArrayList<Set> sets){
-        exerciseLogs.add(new ExerciseLog(sets));
+    public void addExerciseLog(ArrayList<Set> sets, ExerciseGoal exerciseGoal){
+        exerciseLogs.add(new ExerciseLog(sets, exerciseGoal));
     }
 
     public ArrayList<ExerciseLog> getExerciseLogs() {
@@ -42,10 +41,19 @@ public class Exercise implements Serializable {
             }
         }
         System.out.print("\n");
-        System.out.println("\t\tLast Recorded Exercise:");
+        System.out.println("\t\t\tLast Recorded Exercise:");
         printLastExerciseLog();
-        System.out.println("\t\tGoal for next time:");
-        exerciseGoal.print();
+        System.out.println("\t\t\tGoal for next time:");
+        printMostRecentExerciseGoal();
+    }
+
+    public void printMostRecentExerciseGoal(){
+        ExerciseGoal exerciseGoal = getMostRecentExerciseGoal();
+        if (exerciseGoal != null) {
+            exerciseGoal.print();
+        } else {
+            System.out.println("\t\t\t\tNo Current Goal Recorded for this Exercise");
+        }
     }
 
     public void printLastExerciseLog(){
@@ -56,14 +64,14 @@ public class Exercise implements Serializable {
         if(exerciseLogs.size() > 0){
             return exerciseLogs.get(exerciseLogs.size() - 1);
         }
-        return new ExerciseLog(new ArrayList<Set>());
+        return new ExerciseLog(new ArrayList<>(), null);
     }
 
-    public void addExerciseGoal(ExerciseGoal exerciseGoal){
-        this.exerciseGoal = exerciseGoal;
+    public ExerciseInProgress startExercise(){
+        return new ExerciseInProgress(this);
     }
 
-    public void addExerciseGoal(ArrayList<Set> sets){
-        this.exerciseGoal = new ExerciseGoal(sets);
+    public ExerciseGoal getMostRecentExerciseGoal(){
+        return getLastExerciseLog().getExerciseGoal();
     }
 }

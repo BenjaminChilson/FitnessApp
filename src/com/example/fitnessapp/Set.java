@@ -15,6 +15,17 @@ public class Set {
         System.out.println(repetitions + " Repetitions at " + weight + " " + weightUnit.getStringRepresentation());
     }
 
+    public void setRepetitions(int repetitions) {
+        this.repetitions = repetitions;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
+    public void setWeightUnit(WeightUnit weightUnit) {
+        this.weightUnit = weightUnit;
+    }
 }
 
 

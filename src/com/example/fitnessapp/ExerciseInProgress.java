@@ -4,21 +4,27 @@ import java.util.ArrayList;
 
 public class ExerciseInProgress extends SetSeries{
     Exercise exercise;
+    ExerciseGoal goalToMeet;
+    ExerciseGoal goalForNextTime;
 
     public ExerciseInProgress(Exercise exercise) {
         super();
         this.exercise = exercise;
-    }
-
-    public void addSet(int reps, double weight, WeightUnit weightUnit){
-        sets.add(new Set(reps, weight, weightUnit));
-    }
-
-    public void addSet(Set set){
-        sets.add(set);
+        this.goalToMeet = exercise.getMostRecentExerciseGoal();
+        this.goalForNextTime = null;
     }
 
     public void logExercise(){
-        exercise.addExerciseLog(sets);
+        exercise.addExerciseLog(sets, goalForNextTime);
+    }
+
+    public void addGoalForNextTime(){
+        goalForNextTime = new ExerciseGoal(this);
+    }
+
+    public void adjustWeightGoalForNextTime(ArrayList<Double> newWeights){
+        for(int i = 0; i < newWeights.size(); i++){
+            goalForNextTime.getSetAtIndex(i).setWeight(newWeights.get(i));
+        }
     }
 }
