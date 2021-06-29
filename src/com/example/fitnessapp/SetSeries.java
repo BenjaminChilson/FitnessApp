@@ -1,6 +1,5 @@
 package com.example.fitnessapp;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class SetSeries {
@@ -12,9 +11,7 @@ public class SetSeries {
 
     public SetSeries(SetSeries setSeries){
         this.sets = new ArrayList<>();
-        for(Set s : setSeries.getSets()){
-            this.sets.add(new Set(s.repetitions, s.weight, s.weightUnit));
-        }
+        appendSets(setSeries);
     }
 
     public SetSeries(ArrayList<Set> sets){
@@ -46,5 +43,15 @@ public class SetSeries {
 
     public Set getSetAtIndex(int i){
         return sets.get(i);
+    }
+
+    public void setWeightAtIndex(int index, double weight){
+        getSetAtIndex(index).setWeight(weight);
+    }
+
+    public void appendSets(SetSeries setSeries){
+        for(Set s : setSeries.getSets()){
+            this.sets.add(new Set(s.repetitions, s.weight, s.weightUnit));
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.example.fitnessapp;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Workout implements Serializable {
 
@@ -23,6 +24,9 @@ public class Workout implements Serializable {
 
     public void addExercise(Exercise exercise){
         exerciseList.add(exercise);
+    }
+    public void addExercises(Exercise ...exercises){
+        exerciseList.addAll(Arrays.asList(exercises));
     }
 
     public void printWorkout(){

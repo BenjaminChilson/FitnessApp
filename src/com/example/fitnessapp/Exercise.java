@@ -8,11 +8,17 @@ public class Exercise implements Serializable {
     String name;
     ArrayList<Integer> setRepetitions;
     ArrayList<ExerciseLog> exerciseLogs;
+    WeightUnit defaultWeightUnit;
 
     public Exercise(String name) {
         this.name = name;
         setRepetitions = new ArrayList<>();
         exerciseLogs = new ArrayList<>();
+    }
+
+    public Exercise(String name, int ...repetitions){
+        this(name);
+        addSetRepetitions(repetitions);
     }
 
     public String getName() {
@@ -21,6 +27,11 @@ public class Exercise implements Serializable {
 
     public void addSetRepetition(Integer setRepetition){
         setRepetitions.add(setRepetition);
+    }
+    public void addSetRepetitions(int ...repetitions){
+        for(int repetition : repetitions){
+            setRepetitions.add(repetition);
+        }
     }
 
     public void addExerciseLog(ArrayList<Set> sets, ExerciseGoal exerciseGoal){
@@ -73,5 +84,9 @@ public class Exercise implements Serializable {
 
     public ExerciseGoal getMostRecentExerciseGoal(){
         return getLastExerciseLog().getExerciseGoal();
+    }
+
+    public ArrayList<Integer> getSetRepetitions() {
+        return setRepetitions;
     }
 }
